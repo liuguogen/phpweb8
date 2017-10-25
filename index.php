@@ -54,7 +54,8 @@
  * NOTE: If you change these, also change the error_reporting() code below
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
-
+	define('IS_POST',$_SERVER['REQUEST_METHOD'] =='POST' ? true : false);
+	define('IS_GET',$_SERVER['REQUEST_METHOD'] =='GET' ? true : false);
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
