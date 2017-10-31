@@ -18,8 +18,14 @@ class Default_controller extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct() {
+	  parent::__construct();
+	  $home_data = $this->Home_model->getRow('*','setting');
+	  $this->config->set_item('home_data',$home_data);
+	  //$this->_pre_contruct();
+	}
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		$this->load->view('home/index');
 	}
 }
