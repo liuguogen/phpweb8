@@ -28,8 +28,8 @@ class Base_model extends CI_Model
 	/**
 	**获取单条数据
 	**/	
-	public function getRow($fildes='*',$table,$filter=array(),$limit=0,$offset=-1,$orderBy="") {
-		$data=$this->getList($fildes,$table,$filter,$limit,$offset,$orderBy);
+	public function getRow($fildes='*',$table,$filter=array(),$offset=0,$limit=-1,$orderBy="") {
+		$data=$this->getList($fildes,$table,$filter,$offset,$limit,$orderBy);
 		return !empty($data) ? $data[0] :array();
 	}
 
@@ -42,7 +42,7 @@ class Base_model extends CI_Model
 	**@orderBy 排序
 	**/	
 
-	public function getList($fildes='*',$table,$filter=array(),$limit=0,$offset=-1,$orderBy="") {
+	public function getList($fildes='*',$table,$filter=array(),$offset=0,$limit=-1,$orderBy="") {
 		if(!$table)return false;
 		$where="1=1";
 		if(!empty($filter)) {
@@ -56,6 +56,13 @@ class Base_model extends CI_Model
 		if($orderBy) {
 			$sql.=" ORDER BY {$orderBy}";
 		}
+
+		if($offset>=0 || $limit>=0) {
+			$offset = ($offset >= 0) ? $offset . "," : '';
+            $limit = ($limit >= 0) ? $limit : '18446744073709551615';
+            $sql.= " LIMIT {$offset} {$limit}";
+		}
+		
 		$rRow=$this->db->query($sql);
 
 		$data=$rRow->result_array()? $rRow->result_array():array();
@@ -114,11 +121,13 @@ class Base_model extends CI_Model
 	public function query($sql,$sign=true) {
 		if(!$sql) return false;
 		$rRow=$this->db->query($sql);
-		if(!$sign) {
-			return $rRow->result_array() ? $rRow->result_array() :array();
-		}else {
-			return $rRow->row_array() ? $rRow->row_array() :array();
-		}
+
+		return $rRow;
+		// if(!$sign) {
+		// 	return $rRow->result_array() ? $rRow->result_array() :array();
+		// }else {
+		// 	return $rRow->row_array() ? $rRow->row_array() :array();
+		// }
 	}
 } 
 ?>

@@ -48,9 +48,11 @@
 	</div>
 	<a class="left carousel-control" href="#focusslide" role="button" data-slide="prev" rel="nofollow"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">上一个</span> </a> <a class="right carousel-control" href="#focusslide" role="button" data-slide="next" rel="nofollow"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">下一个</span> </a> </div>
   <article class="excerpt-minic excerpt-minic-index">
-		<h2><span class="red">【推荐】</span><a target="_blank" href="#" title="用DTcms做一个独立博客网站（响应式模板）" >用DTcms做一个独立博客网站（响应式模板）</a>
+		<h2><span class="red">【推荐】</span>
+			<a target="_blank" href="<?php  echo site_url('detail/'.$is_top['news_id'])?>" title="<?php echo $is_top['news_name'] ?>" ><?php echo $is_top['news_name'] ?></a>
 		</h2>
-		<p class="note">用DTcms做一个独立博客网站（响应式模板），采用DTcms V4.0正式版（MSSQL）。开发环境：SQL2008R2+VS2010。DTcms V4.0正式版功能修复和优化：1、favicon.ico图标后台上传。（解决要换图标时要连FTP或者开服务器的麻烦）</p>
+		<p class="note"><?php echo mb_substr($is_top['news_content'],0,120,'utf-8').'...'; ?></p>
+
 	</article>
   <div class="title">
 	<h3>最新发布</h3>

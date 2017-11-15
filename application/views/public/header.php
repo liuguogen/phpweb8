@@ -24,15 +24,17 @@
 		</span> </div>
 	</form>
 	<ul class="nav navbar-nav navbar-right">
-	  <li><a data-cont="木庄网络博客" title="木庄网络博客" href="index.html">首页</a></li>
-	  <li><a data-cont="列表页" title="列表页" href="list.html">列表页</a></li>
-	  <li><a data-cont="详细页" title="详细页" href="show.html">详细页</a></li>
-	  <li><a data-cont="404" title="404" href="404.html">404</a></li>
-	  <li><a data-cont="MZ-NetBolg主题" title="MZ-NetBolg主题" href="#" >MZ-NetBolg主题</a></li>
-	  <li><a data-cont="IT技术笔记" title="IT技术笔记" href="#" >IT技术笔记</a></li>
-	  <li><a data-cont="源码分享" title="源码分享" href="#" >源码分享</a></li>
-	  <li><a data-cont="靠谱网赚" title="靠谱网赚" href="#" >靠谱网赚</a></li>
-	  <li><a data-cont="资讯分享" title="资讯分享" href="#" >资讯分享</a></li>
+	  <li><a data-cont="木庄网络博客" title="木庄网络博客" href="<?php echo base_url(); ?>">首页</a></li>
+	
+	  <?php if($this->config->item('cat_list')){
+
+	  	foreach ($this->config->item('cat_list') as $key => $value) {
+	  		
+	  	
+	   ?>
+	  <li><a data-cont="<?php echo strtoupper($value['type_name']); ?>" title="<?php echo strtoupper($value['type_name']); ?>" href="<?php echo base_url(); ?><?php echo strtolower($value['type_name']); ?>"><?php echo strtoupper($value['type_name']); ?></a></li>
+	  
+	  <?php }} ?>
 	</ul>
   </div>
 </div>

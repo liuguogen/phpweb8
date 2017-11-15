@@ -76,6 +76,10 @@
             <td><input type="text" name="keywords" class="form-control" value="<?php if(isset($data['keywords']) && $data['keywords']){echo $data['keywords'];}else{echo '';} ?>" /> <span style="color: red;">多个关键字用英文逗号分隔</span></td>
         </tr>
         <tr>
+            <th>标签 <span style="color: red;">*</span></th>
+            <td><input type="text" name="label" class="form-control" value="<?php if(isset($data['label']) && $data['label']){echo $data['label'];}else{echo '';} ?>" /> <span style="color: red;">多个标签用英文逗号分隔</span></td>
+        </tr>
+        <tr>
             <th>新闻类型 <span style="color: red;">*</span></th>
             <td>
                 <select name="type_id">
@@ -114,7 +118,7 @@
         <tr>
             <th>新闻内容 <span style="color: red;">*</span></th>
             <td>
-                <textarea class="form-control" name="news_content" cols="60" rows="5"><?php if(isset($data['news_content']) && $data['news_content']){ echo $data['news_content'];}else{echo '';} ?></textarea>
+                <textarea class="form-control" name="news_content" cols="60" rows="5"><?php if(isset($data['news_content']) && $data['news_content']){ echo htmlspecialchars($data['news_content']);}else{echo '';} ?></textarea>
                 <script type="text/javascript">CKEDITOR.replace('news_content',{ toolbarCanCollapse: true,  toolbar: [['Source','FontSize','JustifyCenter','Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink','Image','Table']],height: '250px', width: '900px',filebrowserImageUploadUrl:'<?php echo site_url('images/uploads') ?>' })</script>
             </td>
         </tr>
@@ -147,7 +151,7 @@ $('#logo').diyUpload({
 $('#thumb').diyUpload({
     url:"<?php echo site_url('images/upload') ?>",
     success:function( data ) {
-        $('#add_thumb').append('<input type="hidden" name="thumb[]" value='+data._raw+' />');
+        $('#add_thumb').append('<input type="hidden" name="thumb" value='+data._raw+' />');
         
     },
     error:function( err ) {

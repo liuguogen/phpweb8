@@ -22,10 +22,29 @@ class Default_controller extends CI_Controller {
 	  parent::__construct();
 	  $home_data = $this->Home_model->getRow('*','setting');
 	  $this->config->set_item('home_data',$home_data);
+	  //获取NEWStype
+	  $cat_list = $this->Home_model->getList('*','news_type');
+
+	  $this->config->set_item('cat_list',$cat_list);
 	  //$this->_pre_contruct();
+	  //
+	  
 	}
 	public function index()
-	{
-		$this->load->view('home/index');
+	{  
+		//查询推荐文章
+		$data['is_top'] = $this->Home_model->getRow('news_id,news_name,news_content','news',array('is_top'=>1),0,1);
+		$this->load->view('home/index',$data);
+	}
+	/**
+	 * 新闻详情
+	 * @return [type] [description]
+	 */
+	public function newsDetail() {
+		$news_id=$this->uri->segment(2);
+		$data['data'] = $this->Home_model->getRow('*','news',array('news_id'=>$news_id));
+		//增加访问量
+		$this->Home_model->query("update news set read_num=read_num+1 where news_id={$news_id}");
+		$this->load->view('home/detail',$data);
 	}
 }

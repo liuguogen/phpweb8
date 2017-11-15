@@ -111,7 +111,7 @@
         <tr>
             <th>版权信息 <span style="color: red;">*</span></th>
             <td>
-                <textarea class="form-control" name="copy_info" cols="60" rows="5"><?php if(isset($data['copy_info']) && $data['copy_info']){ echo $data['copy_info'];}else{echo '';} ?></textarea>
+                <textarea class="form-control" name="copy_info" cols="60" rows="5"><?php if(isset($data['copy_info']) && $data['copy_info']){ echo htmlspecialchars_decode($data['copy_info']);}else{echo '';} ?></textarea>
                 <script type="text/javascript">CKEDITOR.replace('copy_info',{ toolbarCanCollapse: true,  toolbar: [['Source','FontSize','JustifyCenter','Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink','Image','Table']],height: '250px', width: '900px',filebrowserImageUploadUrl:'<?php echo site_url('images/uploads') ?>' })</script>
             </td>
         </tr>
